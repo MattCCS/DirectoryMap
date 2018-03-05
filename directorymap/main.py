@@ -1,4 +1,5 @@
 
+import os
 import pathlib
 import sys
 
@@ -19,5 +20,6 @@ if __name__ == '__main__':
     fs = dmap.map_directory(root, count_files=settings.COUNT_FILES)
 
     rendering = dotrender.dotrender(fs)
-    dotrender.dotexport(root.name, rendering)
-    dotrender.dotopen(root.name)
+    out_name = dotrender.dotexport(root.name, rendering)
+    render_name = dotrender.render_to_png(out_name)
+    os.system("open {}".format(render_name))

@@ -8,7 +8,7 @@ import os
 from . import settings
 
 
-NODE_FORM = """\t\t{path} [label="{name} ({files})", style="filled", color="{color}"];\n""".format
+NODE_FORM = """\t\t{path} [label="{name}/ ({files})", style="filled", color="{color}"];\n""".format
 EDGE_FORM = "\t{path} -> {comma_paths};\n".format
 
 
@@ -90,9 +90,13 @@ def output_path(name):
 
 
 def dotexport(name, rendering):
-    with output_path(name).open('w') as out:
+    fname = output_path(name)
+    with fname.open('w') as out:
         out.write(rendering)
+    return fname
 
 
-def dotopen(name):
-    os.system("open {}".format(output_path(name)))
+def render_to_png(name):
+    newname = "{}.png".format(name)
+    os.system("dot -Tpng {} -o {}".format(name, newname))
+    return newname

@@ -11,7 +11,7 @@ class FileStructure(object):
 
     REGISTRY = collections.defaultdict(dict)
 
-    def __init__(self, name="/", path="n0", count_files=True):
+    def __init__(self, name="", path="n0", count_files=True):
         key = path.count('_')
         FileStructure.REGISTRY[key]
         assert path not in FileStructure.REGISTRY[key]
